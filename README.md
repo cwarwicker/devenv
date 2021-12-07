@@ -1,1 +1,1 @@
-# devenv
+This repo contains the scripts for my development environments.
