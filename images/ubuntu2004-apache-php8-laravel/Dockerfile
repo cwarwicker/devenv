@@ -9,7 +9,7 @@ RUN add-apt-repository ppa:ondrej/php
 
 # Install required packages.
 RUN apt-get -y install \
-    apache2 php8.0 php8.0-mbstring php8.0-mysql php8.0-xdebug phpunit libapache2-mod-php8.0 curl nano git
+    apache2 php8.0 php8.0-mbstring php8.0-mysql php8.0-xdebug php8.0-curl phpunit libapache2-mod-php8.0 curl nano git
 
 # Enable PHP and Apache rewrite module.
 RUN a2enmod php8.0
