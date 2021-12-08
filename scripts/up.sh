@@ -9,7 +9,7 @@ FLAG="${1}"
 
 # Make sure the project has been initialised.
 if [[ ! -f "${DOCKER_COMPOSE_FILE}" ]]; then
-  echo 'Project has not been initialised. Please run "./init" then try again.'
+  echo 'Project has not been initialised. Please run `./init` then try again.'
   exit 1
 fi
 
@@ -17,8 +17,6 @@ fi
 > ${LOG_FILE}
 
 echo 'Setting up ('${PROJECT_NAME}') development environment'
-
-echo ${LOG_FILE}
 
 # Firstly clone down the main repo into the specified path. Unless it has already been cloned.
 if [[ ! -d ${PROJECT_PATH} ]]
@@ -85,7 +83,7 @@ docker-compose up -d
 cd ${DIR}
 
 echo '=============='
-echo 'Site will be rendered at: http://'${PROJECT_SITE_ADDRESS}
+echo 'Site will be rendered at: http://'${PROJECT_SITE_ADDRESS}:${PROJECT_PORT}
 echo 'Please add the following to your hosts file:' ${IP}'    '${PROJECT_SITE_ADDRESS}
 echo '=============='
 echo 'See:' ${LOG_FILE} 'for output...'

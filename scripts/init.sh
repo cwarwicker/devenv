@@ -21,4 +21,4 @@ sed -i -e 's#%project.path%#'${PROJECT_PATH}'#g' ${DOCKER_COMPOSE_FILE}
 sed -i -e 's#%project.port%#'${PROJECT_PORT}'#g' ${DOCKER_COMPOSE_FILE}
 
 echo 'Done'
-echo 'Please run "./up" to start the project'
+echo 'Please run `./up` to start the project'
