@@ -3,22 +3,43 @@
 # Import the project.sh file to get all the variables.
 source $(pwd)'/env/scripts/project.sh'
 
-DOCKER_COMPOSE_FILE='docker-compose.yml'
-
-# Wipe the log file and any generated files.
+# Wipe the log file.
 > ${LOG_FILE}
-> ${DOCKER_COMPOSE_FILE}
 
 # Begin setup.
 echo 'Initialising ('${PROJECT_NAME}') project'
 
-# Copy the docker-compose template and replace values.
-cp ${DIR_TEMPLATES}'/docker-compose.yml.template' ${DOCKER_COMPOSE_FILE}
+# Find all the template files specified for this project.
+for FILE in ${DIR_TEMPLATES}/*.template; do
 
-# Replace variables in new docker-compose file.
-sed -i -e 's#%project.name%#'${PROJECT_NAME}'#g' ${DOCKER_COMPOSE_FILE}
-sed -i -e 's#%project.path%#'${PROJECT_PATH}'#g' ${DOCKER_COMPOSE_FILE}
-sed -i -e 's#%project.port%#'${PROJECT_PORT}'#g' ${DOCKER_COMPOSE_FILE}
+  # Check the name of the file, to see if it has a specific hard-coded location.
+  FILE_NAME=$(basename -- $FILE)
 
-echo 'Done'
+  # Moodle-specific templates.
+  if [ ${FILE_NAME} = 'moodle.config.php.template' ]
+    then
+
+      # Override file name.
+      FILE_NAME=${PROJECT_PATH}'config.php'
+
+  else
+
+      # Otherwise, assume it just goes in the top level.
+      # Remove ".template" from the end of the file name.
+      FILE_NAME=${FILE_NAME%.template}
+
+  fi
+
+  # Copy the file.
+  cp "${FILE}" "${FILE_NAME}"
+
+  # Replace variables in new docker-compose file.
+  sed -i -e 's#%project.name%#'${PROJECT_NAME}'#g' ${FILE_NAME}
+  sed -i -e 's#%project.path%#'${PROJECT_PATH}'#g' ${FILE_NAME}
+  sed -i -e 's#%project.port%#'${PROJECT_PORT}'#g' ${FILE_NAME}
+  sed -i -e 's#%project.url%#'${PROJECT_URL}'#g' ${FILE_NAME}
+
+done
+
+echo 'Completed'
 echo 'Please run `./up` to start the project'
