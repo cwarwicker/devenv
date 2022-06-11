@@ -8,11 +8,12 @@ RUN apt-get -y install software-properties-common
 RUN add-apt-repository ppa:ondrej/php
 
 # Install required packages.
-RUN apt-get -y install \
-    apache2 php8.0 php8.0-mbstring php8.0-mysql php8.0-xdebug php8.0-curl phpunit libapache2-mod-php8.0 curl nano git
+RUN apt-get -y install apache2 curl nano git \
+    php8.1-common php8.1-cli php8.1-mbstring php8.1-mysql php8.1-xdebug php8.1-curl php8.1-gd php8.1-zip \
+    phpunit libapache2-mod-php8.1
 
 # Enable PHP and Apache rewrite module.
-RUN a2enmod php8.0
+RUN a2enmod php8.1
 RUN a2enmod rewrite
 
 # Set some envionrment variables.
@@ -27,7 +28,7 @@ EXPOSE 80
 
 # Copy over some config files to the container.
 ADD apache.conf /etc/apache2/sites-enabled/000-default.conf
-ADD php.ini /etc/php/8.0/apache2/conf.d/99-custom.ini
+ADD php.ini /etc/php/8.1/apache2/conf.d/99-custom.ini
 
 # Install Composer.
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
