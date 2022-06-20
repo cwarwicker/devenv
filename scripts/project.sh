@@ -19,6 +19,7 @@ PROJECT_ENV=${DIR}'/project.json'
 LOG_FILE=${DIR_LOGS}'/provision.txt'
 
 # Get project info.
+PROJECT_TYPE=$(jq -r '.type' ${PROJECT_ENV})
 PROJECT_NAME=$(jq -r '.name' ${PROJECT_ENV})
 PROJECT_REPO=$(jq -r '.repo' ${PROJECT_ENV})
 PROJECT_BRANCH=$(jq -r '.branch' ${PROJECT_ENV})

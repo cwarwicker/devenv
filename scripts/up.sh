@@ -82,8 +82,12 @@ fi
 docker-compose up -d
 cd ${DIR}
 
-echo '=============='
-echo 'Site will be rendered at: http://'${PROJECT_SITE_ADDRESS}:${PROJECT_PORT}
-echo 'Please add the following to your hosts file:' ${IP}'    '${PROJECT_SITE_ADDRESS}
-echo '=============='
+if [[ "${PROJECT_TYPE}" = "web" ]]
+then
+  echo '=============='
+  echo 'Site will be rendered at: http://'${PROJECT_SITE_ADDRESS}:${PROJECT_PORT}
+  echo 'Please add the following to your hosts file:' ${IP}'    '${PROJECT_SITE_ADDRESS}
+  echo '=============='
+fi
+
 echo 'See:' ${LOG_FILE} 'for output...'
