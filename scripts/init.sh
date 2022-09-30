@@ -34,6 +34,7 @@ for FILE in ${DIR_TEMPLATES}/*.template; do
   cp "${FILE}" "${FILE_NAME}"
 
   # Replace variables in new docker-compose file.
+  sed -i -e 's#%project.type%#'${PROJECT_TYPE}'#g' ${FILE_NAME}
   sed -i -e 's#%project.name%#'${PROJECT_NAME}'#g' ${FILE_NAME}
   sed -i -e 's#%project.path%#'${PROJECT_PATH}'#g' ${FILE_NAME}
   sed -i -e 's#%project.port%#'${PROJECT_PORT}'#g' ${FILE_NAME}
