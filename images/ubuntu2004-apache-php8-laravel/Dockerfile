@@ -12,7 +12,7 @@ RUN add-apt-repository ppa:ondrej/php
 
 # Install required packages.
 RUN apt-get -y install apache2 curl nano git \
-    php8.1-common php8.1-cli php8.1-mbstring php8.1-mysql php8.1-xdebug php8.1-curl php8.1-gd php8.1-zip php8.1-xml php8.1-dom \
+    php8.1-common php8.1-cli php8.1-mbstring php8.1-mysql php8.1-xdebug php8.1-curl php8.1-gd php8.1-zip php8.1-xml php8.1-dom php8.1-redis \
     phpunit libapache2-mod-php8.1
 
 # Enable PHP and Apache rewrite module.
