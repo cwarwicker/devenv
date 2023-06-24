@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Import the project.sh file to get all the variables.
 source $(pwd)'/env/scripts/project.sh'
@@ -13,5 +13,5 @@ FILE=${1:-"./backups/${PROJECT_NAME}-${DAY}.sql"}
 CONTAINER="${PROJECT_NAME}-db"
 
 echo "[`date "+%d-%m-%Y %H:%M:%S"`] Initiating backup of [${DB_NAME}] to: [${FILE}]"
-docker exec -it ${CONTAINER} /usr/bin/mysqldump -u ${DB_USER} -p${DB_PASS} ${DB_NAME} > ${FILE}
+docker exec -t ${CONTAINER} /usr/bin/mysqldump -u ${DB_USER} -p${DB_PASS} ${DB_NAME} > ${FILE}
 echo "[`date "+%d-%m-%Y %H:%M:%S"`] Backup complete"
